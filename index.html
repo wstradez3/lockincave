@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Lock in Cave Daily</title>
+<meta name="description" content="Daily market sheet by @wstradez: live prices, BTC and gold levels and bias. Analysis, not signals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1113; --panel:#16191c; --line:#262a2f; --fg:#e8e9ea; --muted:#8c939b;
+    --up:#26a69a; --down:#ef5350; --warn:#d9a441;
+    --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}
+  .wrap{max-width:1040px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right));display:grid;gap:32px}
+  .kicker{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(28px,5vw,40px);margin:4px 0 0;line-height:1.1}
+  .sub{color:var(--muted);margin:6px 0 0}
+  h2{font-family:var(--display);font-weight:500;font-size:20px;margin:0 0 12px}
+  .note{color:var(--muted);font-size:13px;margin:-6px 0 12px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+  .asset{font-family:var(--display);font-size:22px;font-weight:500}
+  .pill{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:999px;border:1px solid currentColor}
+  .bull{color:var(--up)} .bear{color:var(--down)} .neutral{color:var(--muted)}
+  .read{margin:0 0 10px}
+  .flip{margin:0 0 12px;font-size:13px;color:var(--muted)} .flip b{color:var(--fg);font-weight:500}
+  a{color:var(--fg);text-underline-offset:3px}
+  .small{font-size:13px}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  th{text-align:left;font-size:12px;font-weight:500;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--line)}
+  td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  .num{text-align:right;white-space:nowrap}
+  .lnote{color:var(--muted);font-size:12px}
+  .role{font-size:12px;white-space:nowrap}
+  .r-res{color:var(--down)} .r-sup{color:var(--up)} .r-bias{color:var(--warn)} .r-tgt{color:var(--muted)}
+  .tv{min-height:76px}
+  .minis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .mini{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-height:220px}
+  .scroll{overflow-x:auto}
+  footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:13px;display:grid;gap:4px}
+  footer p{margin:0}
+</style>
+</head>
+<body>
+
+<!-- ============ DAILY UPDATE: edit only this block ============ -->
+<script>
+window.DAILY = {
+  date: "Tuesday, 24 November 2026",
+  focus: [
+    { asset: "Bitcoin", bias: "Bearish",
+      read: "Yesterday's huge pump on the Jensen Huang news got fully erased today. That tells one thing: bears remain in control.",
+      flip: "A clear move back above the weekly open at 60,300 turns the bias bullish again.",
+      chart: "https://www.tradingview.com/chart/?symbol=BITSTAMP:BTCUSD" },
+    { asset: "Gold", bias: "Bullish",
+      read: "The Jensen news low at 3,616 is holding. Price swept liquidity below it and reclaimed.",
+      flip: "Losing 3,616 again cancels the bullish read.",
+      chart: "https://www.tradingview.com/chart/?symbol=OANDA:XAUUSD" }
+  ],
+  levels: {
+    "Bitcoin": [
+      { level: "News candle high", price: 63800, role: "Resistance", note: "Top of the Jensen Huang news pump. Major resistance for the week." },
+      { level: "News candle low", price: 61200, role: "Resistance", note: "Base of the news pump, now resistance after the move was erased." },
+      { level: "Weekly open", price: 60300, role: "Bias line", note: "Price needs to clear above it to turn bullish again." },
+      { level: "Saturday 4H body close", price: 59100, role: "Target", note: "First downside target." },
+      { level: "V-recovery reclaim", price: 57800, role: "Target", note: "Level that reclaimed the V-shaped recovery after Saturday's dip." },
+      { level: "Saturday low", price: 56000, role: "Target", note: "The low of the dip." }
+    ],
+    "Gold": [
+      { level: "Previous day high (PDH)", price: 3691, role: "Resistance", note: "Next upside level." },
+      { level: "Current day high", price: 3675, role: "Resistance", note: "Today's high so far." },
+      { level: "Daily open (DO)", price: 3634, role: "Bias line", note: "Holding above keeps the bullish read." },
+      { level: "Jensen news low", price: 3616, role: "Support", note: "Swept for liquidity and reclaimed. Holding." }
+    ]
+  },
+  news: [
+    { day: "Tue 24 Nov", time: "19:00", event: "US Conference Board Consumer Confidence", note: "" },
+    { day: "Wed 25 Nov", time: "17:30", event: "US Q3 GDP (second estimate) + Core PCE", note: "Key event of the week" },
+    { day: "Thu 26 Nov", time: "All day", event: "US Thanksgiving: stock and bond markets closed", note: "Thin liquidity" },
+    { day: "Fri 27 Nov", time: "22:00", event: "US stock markets close early", note: "Thin liquidity" }
+  ]
+};
+</script>
+<!-- ============ END DAILY UPDATE ============ -->
+
+<div class="wrap">
+  <header>
+    <div class="kicker">@wstradez · Daily market sheet</div>
+    <h1>The Lock in Cave Daily</h1>
+    <p class="sub" id="date"></p>
+  </header>
+
+  <!-- Live ticker tape (TradingView) -->
+  <div class="tv">
+    <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[
+      {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},
+      {"proName":"OANDA:XAUUSD","title":"Gold"},
+      {"proName":"FOREXCOM:NSXUSD","title":"Nasdaq 100"},
+      {"proName":"AMEX:SPY","title":"SPY"},
+      {"proName":"CAPITALCOM:DXY","title":"DXY"}],
+     "showSymbolLogo":true,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script></div>
+  </div>
+
+  <section>
+    <h2>Today's bias</h2>
+    <div class="grid" id="focus"></div>
+  </section>
+
+  <section>
+    <h2>Key levels</h2>
+    <p class="note">Highest to lowest. Mark them on your own chart before the session.</p>
+    <div class="grid" id="levels"></div>
+  </section>
+
+  <section>
+    <h2>Markets, live</h2>
+    <p class="note">Price and daily % change, updating live. Tap a chart to open it on TradingView.</p>
+    <div class="minis" id="minis"></div>
+  </section>
+
+  <section>
+    <h2>High-impact news this week</h2>
+    <p class="note">Dubai time. Avoid opening new trades in the minutes around these. Full calendar on <a href="https://www.forexfactory.com/calendar" target="_blank" rel="noopener">Forex Factory ↗</a></p>
+    <div class="card scroll"><table><thead><tr><th>Day</th><th>Time</th><th>Event</th></tr></thead><tbody id="news"></tbody></table></div>
+  </section>
+
+  <footer>
+    <p>Analysis, not signals. These are my levels and my read of the market, not financial advice. Trade your own plan and manage your risk.</p>
+    <p>@wstradez · The Lock in Cave · Live prices by TradingView</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const D = window.DAILY;
+  const el = (t, cls, txt) => { const e = document.createElement(t); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  const fmt = n => Number(n).toLocaleString("en-US");
+  const biasCls = b => /^bull/i.test(b) ? "bull" : /^bear/i.test(b) ? "bear" : "neutral";
+  const roleCls = r => /^res/i.test(r) ? "r-res" : /^sup/i.test(r) ? "r-sup" : /^bias/i.test(r) ? "r-bias" : "r-tgt";
+
+  document.getElementById("date").textContent = D.date;
+
+  const F = document.getElementById("focus");
+  D.focus.forEach(f => {
+    const c = el("article","card"), top = el("div","top");
+    top.append(el("span","asset",f.asset), el("span","pill "+biasCls(f.bias), f.bias));
+    const flip = el("p","flip"); flip.append(el("b",null,"What flips it: "), document.createTextNode(f.flip));
+    const a = el("a","small","Open "+f.asset+" chart on TradingView ↗"); a.href=f.chart; a.target="_blank"; a.rel="noopener";
+    c.append(top, el("p","read",f.read), flip, a); F.append(c);
+  });
+
+  const L = document.getElementById("levels");
+  Object.entries(D.levels).forEach(([asset, rows]) => {
+    const c = el("div","card"); c.append(el("div","asset",asset));
+    const wrap = el("div","scroll"), t = el("table"), tb = el("tbody");
+    t.innerHTML = "<thead><tr><th>Level</th><th>Role</th><th class='num'>Price</th></tr></thead>";
+    rows.slice().sort((a,b)=>b.price-a.price).forEach(r => {
+      const tr = el("tr"), td1 = el("td");
+      td1.append(el("div",null,r.level), el("div","lnote",r.note));
+      const td2 = el("td"); td2.append(el("span","role "+roleCls(r.role), r.role));
+      tr.append(td1, td2, el("td","num",fmt(r.price))); tb.append(tr);
+    });
+    t.append(tb); wrap.append(t); c.append(wrap); L.append(c);
+  });
+
+  const N = document.getElementById("news");
+  D.news.forEach(n => {
+    const tr = el("tr"), td = el("td");
+    td.append(el("div",null,n.event)); if (n.note) td.append(el("div","lnote",n.note));
+    tr.append(el("td",null,n.day), el("td",null,n.time), td); N.append(tr);
+  });
+
+  // Live mini charts (TradingView)
+  const M = document.getElementById("minis");
+  [["BITSTAMP:BTCUSD"],["OANDA:XAUUSD"],["FOREXCOM:NSXUSD"],["AMEX:SPY"],["CAPITALCOM:DXY"]].forEach(([sym]) => {
+    const box = el("div","mini tradingview-widget-container"); box.append(el("div","tradingview-widget-container__widget"));
+    const s = document.createElement("script");
+    s.src = "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"; s.async = true;
+    s.text = JSON.stringify({symbol:sym,width:"100%",height:220,locale:"en",dateRange:"1D",colorTheme:"dark",isTransparent:true,autosize:false,largeChartUrl:""});
+    box.append(s); M.append(box);
+  });
+})();
+</script>
+</body>
+</html>
