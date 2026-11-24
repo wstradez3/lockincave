@@ -43,6 +43,8 @@
   .minis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
   .mini{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-height:220px}
   .scroll{overflow-x:auto}
+  .mental{border-left:3px solid var(--warn);padding:4px 0 4px 16px}
+  .mental p{font-family:var(--display);font-size:clamp(18px,3vw,22px);margin:6px 0 0;line-height:1.35}
   footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:13px;display:grid;gap:4px}
   footer p{margin:0}
 </style>
@@ -53,6 +55,7 @@
 <script>
 window.DAILY = {
   date: "Tuesday, 24 November 2026",
+  mental: "No rush, no emotion. A trade will always open up. Missing one is fine, forcing one is not.",
   focus: [
     { asset: "Bitcoin", bias: "Bearish",
       read: "Yesterday's huge pump on the Jensen Huang news got fully erased today. That tells one thing: bears remain in control.",
@@ -110,6 +113,11 @@ window.DAILY = {
     </script></div>
   </div>
 
+  <section class="mental">
+    <div class="kicker">The mental room</div>
+    <p id="mental"></p>
+  </section>
+
   <section>
     <h2>Today's bias</h2>
     <div class="grid" id="focus"></div>
@@ -148,6 +156,7 @@ window.DAILY = {
   const roleCls = r => /^res/i.test(r) ? "r-res" : /^sup/i.test(r) ? "r-sup" : /^bias/i.test(r) ? "r-bias" : "r-tgt";
 
   document.getElementById("date").textContent = D.date;
+  document.getElementById("mental").textContent = D.mental || "";
 
   const F = document.getElementById("focus");
   D.focus.forEach(f => {
