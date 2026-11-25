@@ -43,6 +43,9 @@
   .minis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
   .mini{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-height:220px}
   .scroll{overflow-x:auto}
+  .tg{display:inline-block;margin-top:14px;padding:10px 18px;border-radius:999px;background:#229ED9;color:#fff;text-decoration:none;font-weight:600;font-size:14px}
+  .tg:hover{filter:brightness(1.1)}
+  [hidden]{display:none!important}
   .mental{border-left:3px solid var(--warn);padding:4px 0 4px 16px}
   .mental p{font-family:var(--display);font-size:clamp(18px,3vw,22px);margin:6px 0 0;line-height:1.35}
   footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:13px;display:grid;gap:4px}
@@ -55,6 +58,8 @@
 <script>
 window.DAILY = {
   date: "Wednesday, 25 November 2026",
+  updated: "13:40 Dubai time",
+  telegram: "",
   mental: "Range days pay the patient. Let price come to your level, don't chase the middle of the range.",
   focus: [
     { asset: "Bitcoin", bias: "Heavily bearish",
@@ -96,7 +101,8 @@ window.DAILY = {
   <header>
     <div class="kicker">@wstradez · Daily market sheet</div>
     <h1>The Lock in Cave Daily</h1>
-    <p class="sub" id="date"></p>
+    <p class="sub"><span id="date"></span> · <span id="updated"></span></p>
+    <a class="tg" id="tg" href="#" target="_blank" rel="noopener" hidden>Join the Telegram channel →</a>
   </header>
 
   <!-- Live ticker tape (TradingView) -->
@@ -156,6 +162,9 @@ window.DAILY = {
   const roleCls = r => /^res/i.test(r) ? "r-res" : /^sup/i.test(r) ? "r-sup" : /^bias/i.test(r) ? "r-bias" : "r-tgt";
 
   document.getElementById("date").textContent = D.date;
+  document.getElementById("updated").textContent = D.updated ? "Updated " + D.updated : "";
+  const tg = document.getElementById("tg");
+  if (/^https:\/\/t\.me\//.test(D.telegram || "")) { tg.href = D.telegram; tg.hidden = false; }
   document.getElementById("mental").textContent = D.mental || "";
 
   const F = document.getElementById("focus");
