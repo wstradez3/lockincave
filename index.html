@@ -58,12 +58,12 @@ window.DAILY = {
   mental: "Range days pay the patient. Let price come to your level, don't chase the middle of the range.",
   focus: [
     { asset: "Bitcoin", bias: "Leaning bullish",
-      read: "BTC is trading inside the same range as yesterday, which makes life easier. I favour the bulls today, but they need to react fast.",
+      read: "BTC is trading inside the same range as yesterday, which makes life easier. The range high is now the daily open around 59,500–59,700, which has rejected price multiple times. I favour the bulls, but they need to react fast.",
       flip: "A reclaim of 59,300 is a long for me. If price keeps chopping and consolidating under it, I expect further downside.",
       chart: "https://www.tradingview.com/chart/?symbol=BITSTAMP:BTCUSD" },
-    { asset: "Gold", bias: "Update coming",
-      read: "Fresh gold read coming later today.",
-      flip: "Until then, Tuesday's levels below still stand.",
+    { asset: "Gold", bias: "Bearish",
+      read: "Gold lost the daily open at 3,555 and is in free fall. The 3,502 low is a very realistic target.",
+      flip: "A reclaim of the daily open at 3,555 cancels the bearish read.",
       chart: "https://www.tradingview.com/chart/?symbol=OANDA:XAUUSD" }
   ],
   levels: {
@@ -71,16 +71,16 @@ window.DAILY = {
       { level: "News candle high", price: 63800, role: "Resistance", note: "Top of the Jensen Huang news pump. Major resistance for the week." },
       { level: "News candle low", price: 61200, role: "Resistance", note: "Base of the news pump, still resistance." },
       { level: "Weekly open", price: 60300, role: "Bias line", note: "Above it, the bigger picture turns bullish again." },
+      { level: "Daily open / range high (59,500–59,700)", price: 59600, role: "Resistance", note: "Rejected price multiple times." },
       { level: "Reclaim level", price: 59300, role: "Bias line", note: "Reclaim = long setup for me." },
       { level: "Saturday 4H body close", price: 59100, role: "Target", note: "Downside target if the range breaks lower." },
       { level: "V-recovery reclaim", price: 57800, role: "Target", note: "Level that reclaimed the V-shaped recovery after Saturday's dip." },
       { level: "Saturday low", price: 56000, role: "Target", note: "The low of the dip." }
     ],
     "Gold": [
-      { level: "Previous day high (PDH)", price: 3691, role: "Resistance", note: "Tuesday's level." },
-      { level: "Tuesday's high", price: 3675, role: "Resistance", note: "Tuesday's level." },
-      { level: "Tuesday's daily open", price: 3634, role: "Bias line", note: "Tuesday's level." },
-      { level: "Jensen news low", price: 3616, role: "Support", note: "Swept and reclaimed. Losing it cancels the bullish read." }
+      { level: "Jensen news low", price: 3616, role: "Resistance", note: "Lost. Now overhead resistance." },
+      { level: "Daily open (DO)", price: 3555, role: "Bias line", note: "Lost. Gold is in free fall below it." },
+      { level: "November low (20 Nov)", price: 3502, role: "Target", note: "Very realistic downside target." }
     ]
   },
   news: [
