@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Lock in Cave Daily</title>
+<title>The Lock in Cave</title>
 <meta name="description" content="Daily market sheet by @wstradez: live prices, BTC and gold levels and bias. Analysis, not signals.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
   .minis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
   .mini{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-height:220px}
   .scroll{overflow-x:auto}
-  .tg{display:inline-flex;flex-direction:column;align-items:flex-start;margin-top:14px;padding:10px 20px;border-radius:14px;background:#229ED9;color:#fff;text-decoration:none;font-weight:600;font-size:14px}
+  .tg{display:inline-block;margin-top:14px;padding:10px 20px;border-radius:999px;background:#229ED9;color:#fff;text-decoration:none;font-weight:600;font-size:14px}
   .tg-sub{font-size:12px;font-weight:500;opacity:.85;letter-spacing:.04em;text-transform:uppercase}
   .tg:hover{filter:brightness(1.1)}
   [hidden]{display:none!important}
@@ -101,9 +101,9 @@ window.DAILY = {
 <div class="wrap">
   <header>
     <div class="kicker">@wstradez · Daily market sheet</div>
-    <h1>The Lock in Cave Daily</h1>
+    <h1>The Lock in Cave</h1>
     <p class="sub"><span id="date"></span> · <span id="updated"></span></p>
-    <a class="tg" id="tg" href="#" target="_blank" rel="noopener" hidden><span class="tg-name">Join The Lock in Cave →</span><span class="tg-sub">Become a beast</span></a>
+    <a class="tg" id="tg" href="#" target="_blank" rel="noopener" hidden>Become a beast →</a>
   </header>
 
   <!-- Live ticker tape (TradingView) -->
