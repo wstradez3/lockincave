@@ -190,7 +190,7 @@ window.DAILY = {
 
   // Live mini charts (TradingView)
   const M = document.getElementById("minis");
-  [["BITSTAMP:BTCUSD"],["OANDA:XAUUSD"],["FOREXCOM:NSXUSD"],["AMEX:SPY"],["CAPITALCOM:DXY"]].forEach(([sym]) => {
+  [["BITSTAMP:BTCUSD"],["BITSTAMP:ETHUSD"],["BYBIT:HYPEUSDT"],["OANDA:XAUUSD"],["FOREXCOM:NSXUSD"],["FOREXCOM:SPXUSD"],["NASDAQ:NVDA"],["CAPITALCOM:DXY"]].forEach(([sym]) => {
     const box = el("div","mini tradingview-widget-container"); box.append(el("div","tradingview-widget-container__widget"));
     const s = document.createElement("script");
     s.src = "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"; s.async = true;
