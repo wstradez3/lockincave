@@ -21,6 +21,8 @@
   .counter{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   .count{font-family:var(--display);font-size:56px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
   .confession .tag{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn)}
+  .letter p{font-size:16px;line-height:1.65;max-width:65ch}
+  .letter .sign{font-family:var(--display);color:var(--warn);margin-top:4px}
   .rule{font-family:var(--display);font-size:clamp(20px,3.4vw,26px);line-height:1.3;margin:0 0 10px}
 </style>
 </head>
@@ -30,12 +32,20 @@
   <header>
     <div class="kicker">The Lock in Cave</div>
     <h1>The Mental Room</h1>
-    <p class="sub">Your strategy is only as good as the person running it. Check yourself before you check the charts.</p>
+    <p class="sub">Your strategy is only as good as the head running it.</p>
   </header>
 
   <section>
+    <div class="card letter">
+      <p>I built this room because, honestly, my biggest problems in trading were never the charts. I knew my levels. I knew my bias. And I still found ways to lose: rushing, jumping long then short in the same zone, trying to make the money <i>today</i>.</p>
+      <p>So this is where I keep myself in check, and where you can too. Before you open a chart, come here. Take a breath. Be honest with yourself for thirty seconds. If that saves you one bad trade a week, it's done its job.</p>
+      <p class="sign">— Waleed</p>
+    </div>
+  </section>
+
+  <section>
     <h2>Tilt meter</h2>
-    <p class="note">Thirty seconds before you trade. Be honest, nobody sees your answers.</p>
+    <p class="note">I do this before I trade. Answer honestly, nobody sees it but you.</p>
     <div class="card" id="tilt">
       <div class="q"><b>How did you sleep?</b><div class="opts" data-q="sleep">
         <label><input type="radio" name="sleep" value="0"><span>Well</span></label>
@@ -61,7 +71,7 @@
 
   <section>
     <h2>Trade counter</h2>
-    <p class="note">Tap once for every trade you take today. Two is the limit. It resets tomorrow.</p>
+    <p class="note">My limit is two a day. Tap every time you take one, and let the counter be the voice telling you to stop.</p>
     <div class="card counter">
       <div class="count" id="count">0</div>
       <div style="display:grid;gap:8px">
@@ -75,30 +85,30 @@
     <h2>Rule of the week</h2>
     <div class="card">
       <p class="rule">One attempt per zone. If you got stopped at a level, that level is done for the day.</p>
-      <p class="muted">Why it exists: the second and third attempt at the same zone are almost never the plan. They're the urge to be right. Price will give you another level, and another day.</p>
+      <p class="muted">This one's personal. When I get stopped at a level, everything in me wants to go back in and prove I was right. The second and third attempt are never the plan, they're ego. I've paid for that lesson more times than I'd like to admit. Price will give you another level, and another day.</p>
     </div>
   </section>
 
   <section>
     <h2>The Cave Confessions</h2>
-    <p class="note">My real mistakes, so you don't have to make them.</p>
+    <p class="note">Real mistakes, from my own account. I share them so you don't have to pay for the same lessons.</p>
     <div class="grid">
       <article class="card confession">
         <div class="tag">Bottom-catching</div>
         <h3>Six days trying to catch the BTC bottom</h3>
-        <p>I knew the trend was down. I kept buying anyway, because "this has to be the low." Six days of losses. When the bottom finally came, I was too shaken to hold it.</p>
+        <p>I knew the trend was down. I kept buying anyway, every day telling myself "this has to be the low." Six days of losses in a row. And the worst part? When the bottom finally came, I was so shaken I couldn't hold the trade.</p>
         <p class="muted">Lesson: no longs at new lows. Wait for the sweep, the reclaim and the close.</p>
       </article>
       <article class="card confession">
         <div class="tag">Cutting winners</div>
         <h3>Out at breakeven, then it ran 4R</h3>
-        <p>BTC long from 58,850 with the target at 60,000. Price came back to retest my entry, and I closed it at breakeven out of fear. It then ran all the way to my target.</p>
+        <p>BTC long from 58,850, target at 60,000. Price came back to retest my entry and I panicked, closed it at breakeven. Then I watched it run all the way to my target without me. That one stung.</p>
         <p class="muted">Lesson: only your stop or your target closes the trade. A retest of your entry is neither.</p>
       </article>
       <article class="card confession">
         <div class="tag">Rushing</div>
         <h3>Trying to make money fast</h3>
-        <p>The biggest leak in my trading isn't my analysis. It's rushing: jumping long, jumping short, taking trades in the same zone because I want the money today.</p>
+        <p>If I'm honest, the biggest leak in my trading isn't my analysis. It's rushing. Jumping long, jumping short, taking trades in the same zone because I want the money now. I'm working on this every single day, and this room is part of that.</p>
         <p class="muted">Lesson: one setup a day. You don't need today's trade, you need this month's 20.</p>
       </article>
     </div>
@@ -108,9 +118,9 @@
     <h2>Brain hack</h2>
     <div class="card">
       <h3>Why a loss hurts more than a win feels good</h3>
-      <p>Research on decision-making (loss aversion, Kahneman and Tversky) shows people feel a loss roughly twice as strongly as a win of the same size.</p>
-      <p>In trading, that's why you cut winners early to "lock it in," and hold losers hoping they come back. Both come from the same place: avoiding the pain of a loss.</p>
-      <p class="muted">The fix: decide stop and target before entry, and let the plan make the decision, not the feeling.</p>
+      <p>There's research on this (loss aversion, Kahneman and Tversky): a loss hits you roughly twice as hard as a win of the same size feels good.</p>
+      <p>That explains so much. It's why I closed that BTC long at breakeven: I wasn't protecting profit, I was running from the pain of a loss. Same reason people hold losers hoping they come back.</p>
+      <p class="muted">What works for me: stop and target set before I enter, then hands off. The plan decides, not the feeling.</p>
     </div>
   </section>
 
@@ -127,9 +137,9 @@
     qs.forEach(q => { const c = document.querySelector('input[name="'+q+'"]:checked'); if (c) { answered++; score += Number(c.value); } });
     if (answered < qs.length) { v.hidden = true; return; }
     v.hidden = false;
-    if (score <= 2) { v.className = "verdict g"; v.textContent = "Green: you're clear. Trade your plan, nothing else."; }
-    else if (score <= 5) { v.className = "verdict a"; v.textContent = "Amber: trade half size, and only your planned setup."; }
-    else { v.className = "verdict r"; v.textContent = "Red: not today. Close the charts and come back tomorrow. The market will still be there."; }
+    if (score <= 2) { v.className = "verdict g"; v.textContent = "Green. You're good to go. Stick to the plan you wrote, nothing else. Let's lock in."; }
+    else if (score <= 5) { v.className = "verdict a"; v.textContent = "Amber. Something's off today, and that's fine. Half size, only your planned setup, and no forcing it."; }
+    else { v.className = "verdict r"; v.textContent = "Red. Not today, brother. I've been here, and every time I traded like this I paid for it. Close the charts. The market will still be there tomorrow, and so will you."; }
   });
   const key = "lic-count-" + new Date().toISOString().slice(0,10);
   const get = () => { try { return Number(localStorage.getItem(key)) || 0; } catch (e) { return window._c || 0; } };
@@ -138,7 +148,7 @@
   const draw = () => {
     const n = get(); c.textContent = n;
     c.className = "count " + (n >= 2 ? "down" : n === 1 ? "warn" : "");
-    m.textContent = n === 0 ? "No trades yet. Wait for your setup." : n === 1 ? "One trade in. One more, only if it's an A+ setup." : "That's your limit. Done for the day. Close the charts.";
+    m.textContent = n === 0 ? "Nothing yet. Good. Let the setup come to you." : n === 1 ? "One in. Another one only if it's A+. Be honest." : "That's two. You're done for today. Go to the gym, go for a walk, anything but the charts.";
   };
   document.getElementById("add").onclick = () => { set(get()+1); draw(); };
   document.getElementById("undo").onclick = () => { set(Math.max(0,get()-1)); draw(); };
