@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mental Room · The Lock in Cave</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .q{display:grid;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .q:last-of-type{border-bottom:0}
+  .opts{display:flex;gap:8px;flex-wrap:wrap}
+  .opts label{border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px}
+  .opts input{position:absolute;opacity:0;pointer-events:none}
+  .opts input:checked+span{font-weight:600}
+  .opts label:has(input:checked){background:var(--fg);color:var(--bg);border-color:var(--fg)}
+  .opts label:has(input:focus-visible){outline:2px solid var(--warn);outline-offset:2px}
+  .verdict{margin-top:14px;padding:14px;border-radius:10px;border:1px solid var(--line);font-weight:500}
+  .verdict.g{border-color:var(--up);color:var(--up)} .verdict.a{border-color:var(--warn);color:var(--warn)} .verdict.r{border-color:var(--down);color:var(--down)}
+  .counter{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .count{font-family:var(--display);font-size:56px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+  .confession .tag{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn)}
+  .rule{font-family:var(--display);font-size:clamp(20px,3.4vw,26px);line-height:1.3;margin:0 0 10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav" aria-label="Sections"><a href="index.html">Today</a><a href="mental.html" aria-current="page">Mental Room</a><a href="scalping.html">Scalping Lab</a><a href="day-trading.html">Day Trading</a></nav>
+  <header>
+    <div class="kicker">The Lock in Cave</div>
+    <h1>The Mental Room</h1>
+    <p class="sub">Your strategy is only as good as the person running it. Check yourself before you check the charts.</p>
+  </header>
+
+  <section>
+    <h2>Tilt meter</h2>
+    <p class="note">Thirty seconds before you trade. Be honest, nobody sees your answers.</p>
+    <div class="card" id="tilt">
+      <div class="q"><b>How did you sleep?</b><div class="opts" data-q="sleep">
+        <label><input type="radio" name="sleep" value="0"><span>Well</span></label>
+        <label><input type="radio" name="sleep" value="1"><span>Okay</span></label>
+        <label><input type="radio" name="sleep" value="2"><span>Badly</span></label></div></div>
+      <div class="q"><b>How did your last trade end?</b><div class="opts">
+        <label><input type="radio" name="last" value="0"><span>Win or no trade</span></label>
+        <label><input type="radio" name="last" value="1"><span>Breakeven</span></label>
+        <label><input type="radio" name="last" value="2"><span>Loss</span></label></div></div>
+      <div class="q"><b>Do you feel you need to make money today?</b><div class="opts">
+        <label><input type="radio" name="need" value="0"><span>No</span></label>
+        <label><input type="radio" name="need" value="1"><span>A bit</span></label>
+        <label><input type="radio" name="need" value="3"><span>Yes</span></label></div></div>
+      <div class="q"><b>Did you write your one setup for today before the session?</b><div class="opts">
+        <label><input type="radio" name="plan" value="0"><span>Yes</span></label>
+        <label><input type="radio" name="plan" value="3"><span>No</span></label></div></div>
+      <div class="q"><b>Is there high-impact news in the next hour?</b><div class="opts">
+        <label><input type="radio" name="news" value="0"><span>No</span></label>
+        <label><input type="radio" name="news" value="2"><span>Yes</span></label></div></div>
+      <div class="verdict" id="verdict" hidden></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Trade counter</h2>
+    <p class="note">Tap once for every trade you take today. Two is the limit. It resets tomorrow.</p>
+    <div class="card counter">
+      <div class="count" id="count">0</div>
+      <div style="display:grid;gap:8px">
+        <div id="count-msg" class="muted">No trades yet. Wait for your setup.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="add">+ I took a trade</button><button class="btn ghost" id="undo">Undo</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Rule of the week</h2>
+    <div class="card">
+      <p class="rule">One attempt per zone. If you got stopped at a level, that level is done for the day.</p>
+      <p class="muted">Why it exists: the second and third attempt at the same zone are almost never the plan. They're the urge to be right. Price will give you another level, and another day.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The Cave Confessions</h2>
+    <p class="note">My real mistakes, so you don't have to make them.</p>
+    <div class="grid">
+      <article class="card confession">
+        <div class="tag">Bottom-catching</div>
+        <h3>Six days trying to catch the BTC bottom</h3>
+        <p>I knew the trend was down. I kept buying anyway, because "this has to be the low." Six days of losses. When the bottom finally came, I was too shaken to hold it.</p>
+        <p class="muted">Lesson: no longs at new lows. Wait for the sweep, the reclaim and the close.</p>
+      </article>
+      <article class="card confession">
+        <div class="tag">Cutting winners</div>
+        <h3>Out at breakeven, then it ran 4R</h3>
+        <p>BTC long from 58,850 with the target at 60,000. Price came back to retest my entry, and I closed it at breakeven out of fear. It then ran all the way to my target.</p>
+        <p class="muted">Lesson: only your stop or your target closes the trade. A retest of your entry is neither.</p>
+      </article>
+      <article class="card confession">
+        <div class="tag">Rushing</div>
+        <h3>Trying to make money fast</h3>
+        <p>The biggest leak in my trading isn't my analysis. It's rushing: jumping long, jumping short, taking trades in the same zone because I want the money today.</p>
+        <p class="muted">Lesson: one setup a day. You don't need today's trade, you need this month's 20.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Brain hack</h2>
+    <div class="card">
+      <h3>Why a loss hurts more than a win feels good</h3>
+      <p>Research on decision-making (loss aversion, Kahneman and Tversky) shows people feel a loss roughly twice as strongly as a win of the same size.</p>
+      <p>In trading, that's why you cut winners early to "lock it in," and hold losers hoping they come back. Both come from the same place: avoiding the pain of a loss.</p>
+      <p class="muted">The fix: decide stop and target before entry, and let the plan make the decision, not the feeling.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Analysis and education, not signals or financial advice. Trade your own plan and manage your risk.</p>
+    <p>@wstradez · The Lock in Cave · <a href="https://t.me/beasttrader03" target="_blank" rel="noopener">Become a beast →</a></p>
+  </footer>
+</div>
+<script>
+(function(){
+  const qs = ["sleep","last","need","plan","news"], v = document.getElementById("verdict");
+  document.getElementById("tilt").addEventListener("change", () => {
+    let score = 0, answered = 0;
+    qs.forEach(q => { const c = document.querySelector('input[name="'+q+'"]:checked'); if (c) { answered++; score += Number(c.value); } });
+    if (answered < qs.length) { v.hidden = true; return; }
+    v.hidden = false;
+    if (score <= 2) { v.className = "verdict g"; v.textContent = "Green: you're clear. Trade your plan, nothing else."; }
+    else if (score <= 5) { v.className = "verdict a"; v.textContent = "Amber: trade half size, and only your planned setup."; }
+    else { v.className = "verdict r"; v.textContent = "Red: not today. Close the charts and come back tomorrow. The market will still be there."; }
+  });
+  const key = "lic-count-" + new Date().toISOString().slice(0,10);
+  const get = () => { try { return Number(localStorage.getItem(key)) || 0; } catch (e) { return window._c || 0; } };
+  const set = n => { try { localStorage.setItem(key, n); } catch (e) { window._c = n; } };
+  const c = document.getElementById("count"), m = document.getElementById("count-msg");
+  const draw = () => {
+    const n = get(); c.textContent = n;
+    c.className = "count " + (n >= 2 ? "down" : n === 1 ? "warn" : "");
+    m.textContent = n === 0 ? "No trades yet. Wait for your setup." : n === 1 ? "One trade in. One more, only if it's an A+ setup." : "That's your limit. Done for the day. Close the charts.";
+  };
+  document.getElementById("add").onclick = () => { set(get()+1); draw(); };
+  document.getElementById("undo").onclick = () => { set(Math.max(0,get()-1)); draw(); };
+  draw();
+})();
+</script>
+</body>
+</html>

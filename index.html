@@ -49,6 +49,10 @@
   [hidden]{display:none!important}
   .mental{border-left:3px solid var(--warn);padding:4px 0 4px 16px}
   .mental p{font-family:var(--display);font-size:clamp(18px,3vw,22px);margin:6px 0 0;line-height:1.35}
+  .nav{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px}
+  .nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px}
+  .nav a:hover{color:var(--fg)}
+  .nav a[aria-current="page"]{color:var(--bg);background:var(--fg)}
   footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:13px;display:grid;gap:4px}
   footer p{margin:0}
 </style>
@@ -97,6 +101,7 @@ window.DAILY = {
 <!-- ============ END DAILY UPDATE ============ -->
 
 <div class="wrap">
+  <nav class="nav" aria-label="Sections"><a href="index.html" aria-current="page">Today</a><a href="mental.html">Mental Room</a><a href="scalping.html">Scalping Lab</a><a href="day-trading.html">Day Trading</a></nav>
   <header>
     <div class="kicker">@wstradez · Daily market sheet</div>
     <h1>The Lock in Cave</h1>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scalping Lab · The Lock in Cave</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head><body><div class="wrap">
+<nav class="nav" aria-label="Sections"><a href="index.html">Today</a><a href="mental.html">Mental Room</a><a href="scalping.html" aria-current="page">Scalping Lab</a><a href="day-trading.html">Day Trading</a></nav>
+  <header>
+    <div class="kicker">The Lock in Cave</div>
+    <h1>Scalping Lab</h1>
+    <p class="sub">My 1-minute strategy, tested live and in public. Every trade gets logged here, wins and losses.</p>
+  </header>
+
+  <section>
+    <h2>Results so far</h2>
+    <p class="note" id="log-note" hidden></p>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <section>
+    <h2>The setup</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>How it works</h3>
+        <ol class="steps">
+          <li>Mark the <b>Asia session high and low</b>.</li>
+          <li>Wait for price to <b>sweep</b> one of them and take the liquidity behind it.</li>
+          <li>Wait for the <b>1-minute inversion</b>: the imbalance flips against the sweep, showing the breakout traders are trapped.</li>
+          <li>Enter on the inversion, stop beyond the sweep, target the opposite side.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Scalping rules</h3>
+        <ul class="list">
+          <li>Fees matter more here. Every result is counted in R after fees.</li>
+          <li>Maximum two scalps a day. Then the lab is closed.</li>
+          <li>No scalping in the minutes around red-folder news.</li>
+          <li>No scalping on thin days (holidays, weekends), when wicks are random.</li>
+          <li>The scalp never overrides the main daily bias. It's a separate test.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Trade log</h2>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Date</th><th>Trade</th><th>Setup</th><th>Result</th><th class="num">R</th></tr></thead>
+        <tbody id="log"></tbody>
+      </table>
+      <p class="muted" id="log-empty" hidden>Trades will appear here as they're logged.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Analysis and education, not signals or financial advice. Trade your own plan and manage your risk.</p>
+    <p>@wstradez · The Lock in Cave · <a href="https://t.me/beasttrader03" target="_blank" rel="noopener">Become a beast →</a></p>
+  </footer>
+</div><script src="assets/trades.js"></script><script>renderTrades("scalp");</script></body></html>

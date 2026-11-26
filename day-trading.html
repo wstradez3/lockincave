@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day Trading · The Lock in Cave</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head><body><div class="wrap">
+<nav class="nav" aria-label="Sections"><a href="index.html">Today</a><a href="mental.html">Mental Room</a><a href="scalping.html">Scalping Lab</a><a href="day-trading.html" aria-current="page">Day Trading</a></nav>
+  <header>
+    <div class="kicker">The Lock in Cave</div>
+    <h1>Day Trading Playbook</h1>
+    <p class="sub">The model I trade every day on BTC and gold: liquidity sweeps and reclaims at the levels that matter.</p>
+  </header>
+
+  <section>
+    <h2>The model</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Mark the levels</h3>
+        <p>Daily open, previous day high and low, weekly open, Monday high and low, the NYSE open, and the session highs and lows.</p>
+      </div>
+      <div class="card">
+        <h3>2. Wait for the sweep</h3>
+        <p>Price runs a level and takes the stops behind it. Or it shows momentum: repeated failed pushes at the same level.</p>
+      </div>
+      <div class="card">
+        <h3>3. Wait for the reclaim</h3>
+        <p>A 5m or 15m candle closes back on the other side of the level, ideally with an engulfing candle or an imbalance left behind.</p>
+      </div>
+      <div class="card">
+        <h3>4. Execute the plan</h3>
+        <p>Stop beyond the sweep. Minimum 1:2 reward to risk. Partial at 1.5R, then let the rest run to the next level.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>My rules</h2>
+    <div class="card">
+      <ul class="list">
+        <li><b>One setup a day.</b> Written before the session. If price doesn't do that, there's no trade.</li>
+        <li><b>One attempt per zone.</b> Stopped out at a level means the level is done for the day.</li>
+        <li><b>Wait for the imbalance</b> at important levels like the daily open and the NYSE open.</li>
+        <li><b>Daily level lost = no longs.</b> Don't fight the day's structure.</li>
+        <li><b>1:2 minimum.</b> Counter-trend ideas don't get a lower bar.</li>
+        <li><b>The bias flips only on a 15m close through the flip level.</b> Not on a feeling.</li>
+        <li><b>No rush, no emotion.</b> A trade will always open up.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Trade of the week</h2>
+    <div class="card">
+      <div class="kicker" style="color:var(--warn)">BTC · 23–24 November 2026</div>
+      <h3>The Jensen Huang trade</h3>
+      <p>When Nvidia reappointed Jensen Huang as CEO, BTC printed a huge candle from about 61,200 to 63,800. The question was simple: does it hold?</p>
+      <ol class="steps">
+        <li><b>The test:</b> price holding above the news candle means the move is real. Breaking below means it was a fakeout and a liquidity grab.</li>
+        <li><b>The plan, posted before the move:</b> sell on a reaction at the first sell area, add on a revisit of the NYSE open, stop above the spike high.</li>
+        <li><b>The trigger:</b> price couldn't push higher. It rejected the weekly open and broke back below the candle.</li>
+        <li><b>Management:</b> scaled into shorts and took profits step by step on the way down.</li>
+      </ol>
+      <p class="muted">Targets: 60,500, 57,800, 56,000. The lesson: news gives you the candle, structure tells you whether to trust it.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Day trade log</h2>
+    <div class="stats" id="stats" style="margin-bottom:16px"></div>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Date</th><th>Trade</th><th>Setup</th><th>Result</th><th class="num">R</th></tr></thead>
+        <tbody id="log"></tbody>
+      </table>
+      <p class="muted" id="log-empty" hidden>Trades will appear here as they're logged.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Analysis and education, not signals or financial advice. Trade your own plan and manage your risk.</p>
+    <p>@wstradez · The Lock in Cave · <a href="https://t.me/beasttrader03" target="_blank" rel="noopener">Become a beast →</a></p>
+  </footer>
+</div><script src="assets/trades.js"></script><script>renderTrades("day");</script></body></html>
