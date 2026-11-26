@@ -58,40 +58,37 @@
 <!-- ============ DAILY UPDATE: edit only this block ============ -->
 <script>
 window.DAILY = {
-  date: "Wednesday, 25 November 2026",
-  updated: "13:40 Dubai time",
+  date: "Thursday, 26 November 2026",
+  updated: "10:45 Dubai time",
   telegram: "https://t.me/beasttrader03",
-  mental: "Range days pay the patient. Let price come to your level, don't chase the middle of the range.",
+  mental: "Close the charts for a minute. The market will still be there, and so will the next setup.",
   focus: [
-    { asset: "Bitcoin", bias: "Heavily bearish",
-      read: "The daily open around 59,500–59,700 is the range high and has rejected price multiple times. Bears are in control, with 58,000 on the daily as the next target.",
-      flip: "A clean reclaim of the daily open (59,500–59,700) is needed before I look at longs again.",
+    { asset: "Bitcoin", bias: "Bullish",
+      read: "BTC reclaimed 58K and instantly reacted back to the 60K region, roughly where we started the week. We're in the middle of the range now, which is a good place to be. Holding here makes a push towards the week's highs more likely.",
+      flip: "Price needs to hold 59,800–60,200. Losing that zone cancels the push higher.",
       chart: "https://www.tradingview.com/chart/?symbol=BITSTAMP:BTCUSD" },
-    { asset: "Gold", bias: "Bearish",
-      read: "Gold lost the daily open at 3,555 and is in free fall. The 3,502 low is a very realistic target.",
-      flip: "A sweep of 3,502 and a reclaim, or a reclaim of the daily open at 3,555. Until then, every bounce is a lower high.",
+    { asset: "Gold", bias: "Update coming",
+      read: "Fresh gold read coming later today. Yesterday's read was bearish below the 3,555 daily open.",
+      flip: "Yesterday's turnaround conditions: a sweep of 3,502 and a reclaim, or a reclaim of 3,555.",
       chart: "https://www.tradingview.com/chart/?symbol=OANDA:XAUUSD" }
   ],
   levels: {
     "Bitcoin": [
-      { level: "News candle high", price: 63800, role: "Resistance", note: "Top of the Jensen Huang news pump. Major resistance for the week." },
-      { level: "News candle low", price: 61200, role: "Resistance", note: "Base of the news pump, still resistance." },
-      { level: "Weekly open", price: 60300, role: "Bias line", note: "Above it, the bigger picture turns bullish again." },
-      { level: "Daily open / range high (59,500–59,700)", price: 59600, role: "Resistance", note: "Rejected price multiple times." },
-      { level: "Daily target", price: 58000, role: "Target", note: "Next downside target on the daily." },
-      { level: "Saturday 4H body close", price: 59100, role: "Target", note: "Downside target if the range breaks lower." },
-      { level: "V-recovery reclaim", price: 57800, role: "Target", note: "Level that reclaimed the V-shaped recovery after Saturday's dip." },
-      { level: "Saturday low", price: 56000, role: "Target", note: "The low of the dip." }
+      { level: "News candle high", price: 63800, role: "Resistance", note: "Top of the Jensen Huang pump. The week's high." },
+      { level: "News candle low", price: 61200, role: "Resistance", note: "First resistance on the way up." },
+      { level: "Order block + weekly open", price: 60288, role: "Support", note: "Clear order block sitting on the weekly open (60,300). Long area." },
+      { level: "Hold zone (59,800–60,200)", price: 60000, role: "Bias line", note: "Must hold for the push higher." },
+      { level: "58K reclaim", price: 58000, role: "Support", note: "Reclaimed with a huge reaction." },
+      { level: "Saturday low", price: 56000, role: "Support", note: "The low of the dip." }
     ],
     "Gold": [
-      { level: "Jensen news low", price: 3616, role: "Resistance", note: "Lost. Now overhead resistance." },
-      { level: "Daily open (DO)", price: 3555, role: "Bias line", note: "Lost. Gold is in free fall below it." },
-      { level: "November low (20 Nov)", price: 3502, role: "Target", note: "Very realistic target. A sweep and reclaim here could turn gold around." }
+      { level: "Jensen news low", price: 3616, role: "Resistance", note: "Yesterday's level." },
+      { level: "Daily open (Wed)", price: 3555, role: "Bias line", note: "Yesterday's level. Reclaim = turnaround." },
+      { level: "November low (20 Nov)", price: 3502, role: "Target", note: "Sweep and reclaim here could turn gold around." }
     ]
   },
   news: [
-    { day: "Wed 25 Nov", time: "17:30", event: "US Q3 GDP (second estimate) + Core PCE", note: "Key event of the week. Expect volatility." },
-    { day: "Thu 26 Nov", time: "All day", event: "US Thanksgiving: stock and bond markets closed", note: "Thin liquidity" },
+    { day: "Thu 26 Nov", time: "All day", event: "US Thanksgiving: stock and bond markets closed", note: "Thin liquidity. Expect fakeouts." },
     { day: "Fri 27 Nov", time: "22:00", event: "US stock markets close early", note: "Thin liquidity" }
   ]
 };
