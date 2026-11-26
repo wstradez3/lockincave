@@ -32,6 +32,8 @@ window.renderTrades = async function (type) {
     const s1 = document.createElement("div"); s1.textContent = t.setup || "";
     setup.append(s1);
     if (t.notes) { const s2 = document.createElement("div"); s2.className = "muted"; s2.style.fontSize = "12px"; s2.textContent = t.notes; setup.append(s2); }
+    if (t.entry && t.stop && t.exit) { const s3 = document.createElement("div"); s3.className = "muted"; s3.style.fontSize = "12px"; s3.textContent = "Entry " + Number(t.entry).toLocaleString("en-US") + " · Stop " + Number(t.stop).toLocaleString("en-US") + " · Exit " + Number(t.exit).toLocaleString("en-US"); setup.append(s3); }
+    if (/^assets\//.test(t.chart || "")) { const a = document.createElement("a"); a.href = t.chart; a.target = "_blank"; a.rel = "noopener"; a.textContent = "View chart ↗"; a.style.fontSize = "12px"; setup.append(a); }
     tr.append(cell(t.date + (t.time ? " " + t.time : "")), cell(t.asset + " " + (t.direction || "")), setup,
       cell(res, t.result === "win" ? "up" : t.result === "loss" ? "down" : "muted"), cell(rTxt, "num " + (Number(t.r) > 0 ? "up" : Number(t.r) < 0 ? "down" : "")));
     return tr;

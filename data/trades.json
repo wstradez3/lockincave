@@ -1,4 +1,19 @@
 {
   "note": "Scalping test so far: 4 trades taken (3 wins, 1 loss). Full trade-by-trade details being added.",
-  "trades": []
+  "trades": [
+    {
+      "date": "2026-11-26",
+      "type": "scalp",
+      "asset": "BTC",
+      "direction": "short",
+      "setup": "Asia high sweep + 1-min inversion",
+      "entry": 60880,
+      "stop": 61130,
+      "exit": 60460,
+      "r": 1.7,
+      "result": "win",
+      "notes": "Swept the Asia high (61,102), inverted on the 1-min, fully out at the day low. Prices approximate.",
+      "chart": "assets/trades/2026-11-26-btc-short-asia-sweep.png"
+    }
+  ]
 }
