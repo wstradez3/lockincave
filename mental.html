@@ -18,6 +18,9 @@
   .opts label:has(input:focus-visible){outline:2px solid var(--warn);outline-offset:2px}
   .verdict{margin-top:14px;padding:14px;border-radius:10px;border:1px solid var(--line);font-weight:500}
   .verdict.g{border-color:var(--up);color:var(--up)} .verdict.a{border-color:var(--warn);color:var(--warn)} .verdict.r{border-color:var(--down);color:var(--down)}
+  .q textarea{width:100%;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit;resize:vertical}
+  .q textarea:focus-visible{outline:2px solid var(--warn);outline-offset:1px}
+  .tips{margin:10px 0 0;padding-left:18px;color:var(--fg);font-weight:400;display:grid;gap:4px}
   .counter{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   .count{font-family:var(--display);font-size:56px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
   .confession .tag{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn)}
@@ -45,26 +48,43 @@
 
   <section>
     <h2>Tilt meter</h2>
-    <p class="note">I do this before I trade. Answer honestly, nobody sees it but you.</p>
+    <p class="note">I do this before I trade. Answer honestly, nothing here is saved or sent anywhere.</p>
     <div class="card" id="tilt">
-      <div class="q"><b>How did you sleep?</b><div class="opts" data-q="sleep">
-        <label><input type="radio" name="sleep" value="0"><span>Well</span></label>
-        <label><input type="radio" name="sleep" value="1"><span>Okay</span></label>
-        <label><input type="radio" name="sleep" value="2"><span>Badly</span></label></div></div>
-      <div class="q"><b>How did your last trade end?</b><div class="opts">
-        <label><input type="radio" name="last" value="0"><span>Win or no trade</span></label>
+      <div class="q"><b>How did your last trade go?</b><div class="opts">
+        <label><input type="radio" name="last" value="0"><span>Win</span></label>
         <label><input type="radio" name="last" value="1"><span>Breakeven</span></label>
-        <label><input type="radio" name="last" value="2"><span>Loss</span></label></div></div>
-      <div class="q"><b>Do you feel you need to make money today?</b><div class="opts">
-        <label><input type="radio" name="need" value="0"><span>No</span></label>
-        <label><input type="radio" name="need" value="1"><span>A bit</span></label>
-        <label><input type="radio" name="need" value="3"><span>Yes</span></label></div></div>
-      <div class="q"><b>Did you write your one setup for today before the session?</b><div class="opts">
-        <label><input type="radio" name="plan" value="0"><span>Yes</span></label>
-        <label><input type="radio" name="plan" value="3"><span>No</span></label></div></div>
-      <div class="q"><b>Is there high-impact news in the next hour?</b><div class="opts">
-        <label><input type="radio" name="news" value="0"><span>No</span></label>
-        <label><input type="radio" name="news" value="2"><span>Yes</span></label></div></div>
+        <label><input type="radio" name="last" value="2"><span>Loss</span></label>
+        <label><input type="radio" name="last" value="0"><span>No trade yet today</span></label>
+      </div></div>
+      <div class="q"><b>Why are you trading today?</b><div class="opts">
+        <label><input type="radio" name="why" value="0"><span>To execute my plan</span></label>
+        <label><input type="radio" name="why" value="3"><span>To make back a loss</span></label>
+        <label><input type="radio" name="why" value="3"><span>I need to hit a money target</span></label>
+        <label><input type="radio" name="why" value="3"><span>I'm bored and want action</span></label>
+      </div></div>
+      <div class="q"><b>Do you set your stop loss?</b><div class="opts">
+        <label><input type="radio" name="stop" value="0"><span>Yes, before I enter</span></label>
+        <label><input type="radio" name="stop" value="1"><span>Yes, after I enter</span></label>
+        <label><input type="radio" name="stop" value="5"><span>No</span></label>
+      </div></div>
+      <div class="q"><b>Do you know your targets?</b><div class="opts">
+        <label><input type="radio" name="target" value="0"><span>Yes, written down</span></label>
+        <label><input type="radio" name="target" value="1"><span>Roughly</span></label>
+        <label><input type="radio" name="target" value="2"><span>No</span></label>
+      </div></div>
+      <div class="q"><b>Are you taking scalps or day trades today?</b><div class="opts">
+        <label><input type="radio" name="style" value="0"><span>Scalps</span></label>
+        <label><input type="radio" name="style" value="0"><span>Day trades</span></label>
+        <label><input type="radio" name="style" value="1"><span>Both</span></label>
+        <label><input type="radio" name="style" value="2"><span>Not sure yet</span></label>
+      </div></div>
+      <div class="q"><b>If this trade loses, what happens to you and your capital?</b><div class="opts">
+        <label><input type="radio" name="lose" value="0"><span>Nothing serious, it's planned risk</span></label>
+        <label><input type="radio" name="lose" value="1"><span>It stings, but I'm fine</span></label>
+        <label><input type="radio" name="lose" value="4"><span>It would really hurt me</span></label>
+      </div>
+        <textarea id="lose-text" rows="3" placeholder="Be honest. Write it out: how would you feel, what would it do to your account, what would you do next?" aria-label="What happens if this trade loses"></textarea>
+</div>
       <div class="verdict" id="verdict" hidden></div>
     </div>
   </section>
@@ -131,15 +151,28 @@
 </div>
 <script>
 (function(){
-  const qs = ["sleep","last","need","plan","news"], v = document.getElementById("verdict");
+  const qs = ["last","why","stop","target","style","lose"], v = document.getElementById("verdict");
+  const val = q => { const c = document.querySelector('input[name="'+q+'"]:checked'); return c ? Number(c.value) : null; };
   document.getElementById("tilt").addEventListener("change", () => {
-    let score = 0, answered = 0;
-    qs.forEach(q => { const c = document.querySelector('input[name="'+q+'"]:checked'); if (c) { answered++; score += Number(c.value); } });
-    if (answered < qs.length) { v.hidden = true; return; }
+    const ans = Object.fromEntries(qs.map(q => [q, val(q)]));
+    if (qs.some(q => ans[q] === null)) { v.hidden = true; return; }
+    const score = qs.reduce((t, q) => t + ans[q], 0);
+    const tips = [];
+    if (ans.why >= 3) tips.push("You're trading for the money, not the setup. That's exactly when I rush and overtrade.");
+    if (ans.stop === 1) tips.push("Set the stop before you enter, not after. After is when the excuses start.");
+    if (ans.target >= 1) tips.push("Write your target down before entry, or you'll close early the moment it gets scary.");
+    if (ans.style >= 1) tips.push("Pick one today: scalp or day trade. Mixing them is how long and short end up in the same zone.");
+    if (ans.lose >= 4) tips.push("If a loss would really hurt, your size is too big. Cut it until a loss is just a number.");
+    if (ans.last === 2) tips.push("Last one was a loss. Don't try to win it back on the next one.");
+    let cls, head;
+    if (ans.stop === 5) { cls = "r"; head = "Red. No stop loss, no trade. I don't care how good the setup looks. This is how accounts get blown."; }
+    else if (score <= 2) { cls = "g"; head = "Green. You're good to go. Stick to the plan you wrote, nothing else. Let's lock in."; }
+    else if (score <= 6) { cls = "a"; head = "Amber. Something's off today, and that's fine. Half size, only your planned setup, and no forcing it."; }
+    else { cls = "r"; head = "Red. Not today, brother. I've been here, and every time I traded like this I paid for it. Close the charts. The market will still be there tomorrow, and so will you."; }
+    v.className = "verdict " + cls;
+    v.replaceChildren(document.createTextNode(head));
+    if (tips.length) { const ul = document.createElement("ul"); ul.className = "tips"; tips.forEach(t => { const li = document.createElement("li"); li.textContent = t; ul.append(li); }); v.append(ul); }
     v.hidden = false;
-    if (score <= 2) { v.className = "verdict g"; v.textContent = "Green. You're good to go. Stick to the plan you wrote, nothing else. Let's lock in."; }
-    else if (score <= 5) { v.className = "verdict a"; v.textContent = "Amber. Something's off today, and that's fine. Half size, only your planned setup, and no forcing it."; }
-    else { v.className = "verdict r"; v.textContent = "Red. Not today, brother. I've been here, and every time I traded like this I paid for it. Close the charts. The market will still be there tomorrow, and so will you."; }
   });
   const key = "lic-count-" + new Date().toISOString().slice(0,10);
   const get = () => { try { return Number(localStorage.getItem(key)) || 0; } catch (e) { return window._c || 0; } };
