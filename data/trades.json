@@ -14,6 +14,48 @@
       "result": "win",
       "notes": "Swept the Asia high (61,102), inverted on the 1-min, fully out at the day low. Prices approximate.",
       "chart": "assets/trades/2026-11-26-btc-short-asia-sweep.png"
+    },
+    {
+      "date": "2026-11-26",
+      "type": "day",
+      "asset": "BTC",
+      "direction": "long",
+      "setup": "Day low sweep + inversion, targeting resistance",
+      "entry": 60900,
+      "stop": 60345,
+      "exit": 60345,
+      "r": -1.0,
+      "result": "loss",
+      "notes": "Entered early, near the top of the inversion instead of waiting for the limit. Stopped by the wick into 60K. Price later reached the target. Prices approximate.",
+      "chart": "assets/trades/2026-11-26-btc-long-1.png"
+    },
+    {
+      "date": "2026-11-26",
+      "type": "day",
+      "asset": "BTC",
+      "direction": "long",
+      "setup": "Re-entry at the day low after the sweep into 60K",
+      "entry": 60450,
+      "stop": 59920,
+      "exit": 60450,
+      "r": 0.0,
+      "result": "be",
+      "notes": "Moved the stop to breakeven overnight. It got tagged, then price ran to the 61,400 target (about +1.8R missed). Prices approximate.",
+      "chart": "assets/trades/2026-11-26-btc-long-2.png"
+    },
+    {
+      "date": "2026-11-27",
+      "type": "scalp",
+      "asset": "BTC",
+      "direction": "short",
+      "setup": "1-min liquidity grab above 61,720",
+      "entry": 61740,
+      "stop": 61793,
+      "exit": null,
+      "r": 0,
+      "result": "open",
+      "notes": "Swept the 61,720 high on the 1-minute. Target around 61,410. Result to be confirmed.",
+      "chart": "assets/trades/2026-11-27-btc-short-scalp.png"
     }
   ]
 }
