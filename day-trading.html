@@ -7,76 +7,141 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
-</head><body><div class="wrap">
-<nav class="nav" aria-label="Sections"><a href="index.html">Today</a><a href="mental.html">Mental Room</a><a href="scalping.html">Scalping Lab</a><a href="day-trading.html" aria-current="page">Day Trading</a></nav>
+<style>
+  .check{display:grid;gap:2px}
+  .check label{display:flex;gap:12px;align-items:flex-start;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+  .check label:last-child{border-bottom:0}
+  .check input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--up);flex:none}
+  .check small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+  .req{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);margin-left:6px}
+  .grade{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:10px}
+  .grade .g{font-family:var(--display);font-size:44px;font-weight:600;line-height:1;min-width:84px}
+  .g-ap{color:var(--up)} .g-a{color:var(--up)} .g-b{color:var(--warn)} .g-skip{color:var(--down)}
+  .lib img{width:100%;border-radius:8px;border:1px solid var(--line);margin:4px 0 10px;display:block}
+  .lib .tag{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn)}
+  .lv-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  .lv-row:last-child{border-bottom:0}
+  .r-res{color:var(--down)} .r-sup{color:var(--up)} .r-bias{color:var(--warn)} .r-tgt{color:var(--muted)}
+  .pill{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:999px;border:1px solid currentColor}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav" aria-label="Sections"><a href="index.html">Today</a><a href="mental.html">Mental Room</a><a href="scalping.html">Scalping Lab</a><a href="day-trading.html" aria-current="page">Day Trading</a></nav>
   <header>
     <div class="kicker">The Lock in Cave</div>
-    <h1>Day Trading Playbook</h1>
-    <p class="sub">The model I trade every day on BTC and gold: liquidity sweeps and reclaims at the levels that matter.</p>
+    <h1>Day Trading Room</h1>
+    <p class="sub">How I trade BTC and gold every day: liquidity sweeps and reclaims at the levels that matter. Check your setup here before you click anything.</p>
   </header>
 
-  <section>
-    <h2>The model</h2>
+  <section id="checker">
+    <h2>Confluence checker</h2>
+    <p class="note">Tick only what you can actually see on the chart. Be strict, this is how I grade my own trades.</p>
+    <div class="card">
+      <div class="check" id="check">
+        <label><input type="checkbox" data-k="level" data-req="1"><span><b>At a key level</b><span class="req">Required</span><small>Daily open, PDH/PDL, weekly open, Monday high/low, NYSE open, session high/low.</small></span></label>
+        <label><input type="checkbox" data-k="sweep"><span><b>Liquidity sweep, fakeout or momentum</b><small>Price ran the level and took the stops, or kept failing to push through it.</small></span></label>
+        <label><input type="checkbox" data-k="reclaim"><span><b>Reclaim with a close</b><small>A 5m or 15m candle closed back on the other side, ideally engulfing.</small></span></label>
+        <label><input type="checkbox" data-k="imb"><span><b>Imbalance or inversion after the trigger</b><small>A clean gap left behind, or a gap that flipped against the sweep.</small></span></label>
+        <label><input type="checkbox" data-k="bias"><span><b>15m bias aligned</b><small>The trade goes with the 15-minute structure, not against it.</small></span></label>
+        <label><input type="checkbox" data-k="edge"><span><b>From the top or bottom of the range</b><small>Not from the middle. The middle is where I get chopped.</small></span></label>
+        <label><input type="checkbox" data-k="pattern"><span><b>Double top/bottom or order block</b><small>Extra structure at the level.</small></span></label>
+        <label><input type="checkbox" data-k="rr" data-req="1"><span><b>R:R of 1:2 or better</b><span class="req">Required</span><small>Stop beyond the sweep, target at the next level.</small></span></label>
+      </div>
+      <div class="grade"><div class="g" id="grade">—</div><div id="grade-msg" class="muted">Tick what you see to grade the setup.</div></div>
+    </div>
+  </section>
+
+  <section id="levels">
+    <h2>Today's levels</h2>
+    <p class="note" id="lv-date"></p>
+    <div class="grid" id="lv"></div>
+  </section>
+
+  <section id="library">
+    <h2>Confluence library</h2>
+    <p class="note">The things I look for, and why they work.</p>
+    <div class="grid lib">
+      <article class="card">
+        <div class="tag">Where</div>
+        <h3>Key levels</h3>
+        <p>Daily open, previous day high and low, weekly open, Monday high and low, the NYSE open and the session highs and lows. These are where everyone's stops and orders sit, so that's where the real moves start.</p>
+        <p class="muted">No key level, no trade. Everything else is built on this.</p>
+      </article>
+      <article class="card">
+        <div class="tag">The trap</div>
+        <h3>Liquidity sweep and fakeout</h3>
+        <img src="assets/library/day-low-sweep-inversion.png" alt="BTC 5-minute chart: price sweeps the day low at 60,457, reclaims it and inverts the red candle above, with a long position drawn to the resistance area" loading="lazy">
+        <p>Price runs just past a level, takes the stops behind it, then snaps back. The traders who chased the breakout are now trapped, and their exits fuel the move the other way.</p>
+        <p class="muted">Above: the day low at 60,457 gets swept, reclaimed and the red candle inverted. That's the long.</p>
+      </article>
+      <article class="card">
+        <div class="tag">The trap</div>
+        <h3>Momentum: failed pushes</h3>
+        <p>Sometimes there's no clean sweep. Instead price keeps hitting the same level and failing, two or three times. Each failure tells you the other side is defending it. I treat that as a valid substitute for a sweep.</p>
+      </article>
+      <article class="card">
+        <div class="tag">The trigger</div>
+        <h3>Reclaim and engulfing</h3>
+        <p>The sweep alone isn't the entry. I want a 5m or 15m candle to close back on the other side of the level. An engulfing candle is the cleanest version: it swallows the move that did the sweep.</p>
+        <p class="muted">No close, no confirmation. A wick back inside isn't enough.</p>
+      </article>
+      <article class="card">
+        <div class="tag">The trigger</div>
+        <h3>Imbalance and inversion</h3>
+        <img src="assets/trades/2026-11-26-btc-short-asia-sweep.png" alt="BTC 1-minute chart: price sweeps the Asia high at 61,102, the inversion candles are circled, and a short runs to the day low" loading="lazy">
+        <p>A fast move leaves a gap (an imbalance) behind. When price comes back and that gap flips against the original move, it's an inversion: the breakout traders are stuck.</p>
+        <p class="muted">Above: Asia high swept, inversion circled, short to the day low.</p>
+      </article>
+      <article class="card">
+        <div class="tag">Context</div>
+        <h3>15m bias and range position</h3>
+        <p>Trade with the 15-minute structure, and take setups from the top or the bottom of the range, never the middle. The middle is where I've been chopped up the most.</p>
+      </article>
+      <article class="card">
+        <div class="tag">Extra</div>
+        <h3>Double top/bottom and order blocks</h3>
+        <p>Extra structure at the level. A double bottom on a key level, or an order block sitting right on the weekly open, turns a good level into a great one.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="model">
+    <h2>The model and my rules</h2>
     <div class="grid">
       <div class="card">
-        <h3>1. Mark the levels</h3>
-        <p>Daily open, previous day high and low, weekly open, Monday high and low, the NYSE open, and the session highs and lows.</p>
+        <h3>The model</h3>
+        <ol class="steps">
+          <li><b>Mark the levels</b> before the session.</li>
+          <li><b>Wait for the sweep</b> or failed pushes at one of them.</li>
+          <li><b>Wait for the reclaim</b>: a 5m or 15m close back through, ideally with an imbalance.</li>
+          <li><b>Execute:</b> stop beyond the sweep, 1:2 minimum, partial at 1.5R, let the rest run.</li>
+        </ol>
       </div>
       <div class="card">
-        <h3>2. Wait for the sweep</h3>
-        <p>Price runs a level and takes the stops behind it. Or it shows momentum: repeated failed pushes at the same level.</p>
-      </div>
-      <div class="card">
-        <h3>3. Wait for the reclaim</h3>
-        <p>A 5m or 15m candle closes back on the other side of the level, ideally with an engulfing candle or an imbalance left behind.</p>
-      </div>
-      <div class="card">
-        <h3>4. Execute the plan</h3>
-        <p>Stop beyond the sweep. Minimum 1:2 reward to risk. Partial at 1.5R, then let the rest run to the next level.</p>
+        <h3>My rules</h3>
+        <ul class="list">
+          <li><b>One setup a day.</b> Written before the session.</li>
+          <li><b>One attempt per zone.</b> Stopped at a level means it's done for the day.</li>
+          <li><b>Daily level lost = no longs.</b></li>
+          <li><b>1:2 minimum.</b> Counter-trend ideas don't get a lower bar.</li>
+          <li><b>Breakeven only after the 1.5R partial.</b> Never before, never overnight.</li>
+          <li><b>The bias flips only on a 15m close</b> through the flip level.</li>
+          <li><b>No rush, no emotion.</b> A trade will always open up.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>My rules</h2>
-    <div class="card">
-      <ul class="list">
-        <li><b>One setup a day.</b> Written before the session. If price doesn't do that, there's no trade.</li>
-        <li><b>One attempt per zone.</b> Stopped out at a level means the level is done for the day.</li>
-        <li><b>Wait for the imbalance</b> at important levels like the daily open and the NYSE open.</li>
-        <li><b>Daily level lost = no longs.</b> Don't fight the day's structure.</li>
-        <li><b>1:2 minimum.</b> Counter-trend ideas don't get a lower bar.</li>
-        <li><b>The bias flips only on a 15m close through the flip level.</b> Not on a feeling.</li>
-        <li><b>No rush, no emotion.</b> A trade will always open up.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
+  <section id="trade-of-the-week">
     <h2>Trade of the week</h2>
-    <div class="card">
-      <div class="kicker" style="color:var(--warn)">BTC · 23–24 November 2026</div>
-      <h3>The Jensen Huang trade</h3>
-      <p>When Nvidia reappointed Jensen Huang as CEO, BTC printed a huge candle from about 61,200 to 63,800. The question was simple: does it hold?</p>
-      <ol class="steps">
-        <li><b>The test:</b> price holding above the news candle means the move is real. Breaking below means it was a fakeout and a liquidity grab.</li>
-        <li><b>The plan, posted before the move:</b> sell on a reaction at the first sell area, add on a revisit of the NYSE open, stop above the spike high.</li>
-        <li><b>The trigger:</b> price couldn't push higher. It rejected the weekly open and broke back below the candle.</li>
-        <li><b>Management:</b> scaled into shorts and took profits step by step on the way down.</li>
-      </ol>
-      <p class="muted">Targets: 60,500, 57,800, 56,000. The lesson: news gives you the candle, structure tells you whether to trust it.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>Day trade log</h2>
-    <div class="stats" id="stats" style="margin-bottom:16px"></div>
-    <div class="card scroll">
-      <table>
-        <thead><tr><th>Date</th><th>Trade</th><th>Setup</th><th>Result</th><th class="num">R</th></tr></thead>
-        <tbody id="log"></tbody>
-      </table>
-      <p class="muted" id="log-empty" hidden>Trades will appear here as they're logged.</p>
+    <div class="card lib">
+      <div class="tag">BTC · 23–24 November 2026</div>
+      <h3>The Jensen Huang trade (+2R)</h3>
+      <img src="assets/library/jensen-trade.png" alt="BTC 5-minute chart with the Jensen Huang news candle, Monday open and Friday high marked, and the short drawn from sell area 2 down to the range low" loading="lazy">
+      <p>When Nvidia reappointed Jensen Huang as CEO, BTC printed a huge candle from about 61,200 to 63,800. One question: does it hold? Holding above meant the move was real. Breaking below meant it was a fakeout.</p>
+      <p>Price couldn't push higher, rejected and broke back below the candle. I scaled into shorts and took profits on the way down. The plan was posted before the move.</p>
+      <p class="muted">The lesson: news gives you the candle, structure tells you whether to trust it.</p>
     </div>
   </section>
 
@@ -84,4 +149,51 @@
     <p>Analysis and education, not signals or financial advice. Trade your own plan and manage your risk.</p>
     <p>@wstradez · The Lock in Cave · <a href="https://t.me/beasttrader03" target="_blank" rel="noopener">Become a beast →</a></p>
   </footer>
-</div><script src="assets/trades.js"></script><script>renderTrades("day");</script></body></html>
+</div>
+<script src="data/daily.js"></script>
+<script>
+(function(){
+  // Confluence checker
+  const boxes = [...document.querySelectorAll('#check input')], g = document.getElementById('grade'), m = document.getElementById('grade-msg');
+  const grade = () => {
+    const on = k => boxes.find(b => b.dataset.k === k).checked;
+    const extras = boxes.filter(b => !b.dataset.req && b.checked).length;
+    if (!boxes.some(b => b.checked)) { g.textContent = '—'; g.className = 'g'; m.textContent = 'Tick what you see to grade the setup.'; return; }
+    if (!on('level')) { g.textContent = 'SKIP'; g.className = 'g g-skip'; m.textContent = "No key level, no trade. Wait for price to come to one."; return; }
+    if (!on('rr')) { g.textContent = 'SKIP'; g.className = 'g g-skip'; m.textContent = "Under 1:2. Find a better entry or let it go."; return; }
+    if (extras >= 5) { g.textContent = 'A+'; g.className = 'g g-ap'; m.textContent = "This is the one. Full plan, stop set, and hands off."; }
+    else if (extras === 4) { g.textContent = 'A'; g.className = 'g g-a'; m.textContent = "Solid setup. Stick to the plan."; }
+    else if (extras === 3) { g.textContent = 'B'; g.className = 'g g-b'; m.textContent = "Tradeable, but not great. Half size, or wait for one more confirmation."; }
+    else { g.textContent = 'SKIP'; g.className = 'g g-skip'; m.textContent = "Not enough confluence. That's the trade I take when I'm rushing."; }
+  };
+  boxes.forEach(b => b.addEventListener('change', grade));
+
+  // Today's levels from the daily update
+  const D = window.DAILY || {}, lv = document.getElementById('lv');
+  document.getElementById('lv-date').textContent = D.date ? D.date + (D.updated ? ' · updated ' + D.updated : '') : '';
+  const fmt = n => Number(n).toLocaleString('en-US');
+  const roleCls = r => /^res/i.test(r) ? 'r-res' : /^sup/i.test(r) ? 'r-sup' : /^bias/i.test(r) ? 'r-bias' : 'r-tgt';
+  const biasCls = b => /^bull/i.test(b) ? 'up' : /^bear/i.test(b) ? 'down' : 'muted';
+  Object.entries(D.levels || {}).forEach(([asset, rows]) => {
+    const c = document.createElement('div'); c.className = 'card';
+    const top = document.createElement('div'); top.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px';
+    const h = document.createElement('h3'); h.textContent = asset; h.style.margin = '0';
+    top.append(h);
+    const f = (D.focus || []).find(x => x.asset === asset);
+    if (f) { const p = document.createElement('span'); p.className = 'pill ' + biasCls(f.bias); p.textContent = f.bias; top.append(p); }
+    c.append(top);
+    rows.slice().sort((a, b) => b.price - a.price).forEach(r => {
+      const row = document.createElement('div'); row.className = 'lv-row';
+      const l = document.createElement('span'); l.textContent = r.level;
+      const right = document.createElement('span');
+      const role = document.createElement('span'); role.className = roleCls(r.role); role.style.fontSize = '12px'; role.textContent = r.role + '  ';
+      const pr = document.createElement('b'); pr.textContent = fmt(r.price);
+      right.append(role, pr); row.append(l, right); c.append(row);
+    });
+    lv.append(c);
+  });
+  if (!lv.children.length) { const p = document.createElement('p'); p.className = 'muted'; p.textContent = "Today's levels are coming shortly."; lv.append(p); }
+})();
+</script>
+</body>
+</html>
