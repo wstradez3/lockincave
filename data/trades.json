@@ -20,13 +20,13 @@
       "type": "scalp",
       "asset": "BTC",
       "direction": "short",
-      "setup": "1-min liquidity grab above 61,720",
+      "setup": "Counter-trend short at a 'weak' high (no liquidity taken)",
       "entry": 61740,
       "stop": 61793,
       "exit": 61793,
       "r": -1.0,
       "result": "loss",
-      "notes": "Swept the 61,720 high on the 1-minute, but the reaction was small and price came back through. Stopped out.",
+      "notes": "BTC was up strongly on the day. Small 5m rejections, but no sweep and no break of structure. Against the bias. Stopped out.",
       "chart": "assets/trades/2026-11-27-btc-short-scalp.png"
     },
     {
@@ -38,10 +38,21 @@
       "entry": 61647,
       "stop": 61484,
       "exit": 62106,
-      "r": 2.8,
+      "r": 1.7,
       "result": "win",
-      "notes": "A big 5m red candle stopped right at an imbalance zone. On the 1-minute, price swept the lows and reclaimed. Entered on the reclaim, target hit. Prices approximate.",
+      "notes": "A big 5m red candle stopped at an imbalance zone. On the 1-minute, price swept the equal lows (liquidity taken) and reclaimed. A+ setup, closed at about 1.7R.",
       "chart": "assets/trades/2026-11-27-btc-long-imbalance-sweep.png"
+    },
+    {
+      "date": "2026-11-27",
+      "time": "NY session",
+      "type": "scalp",
+      "asset": "BTC",
+      "direction": "short",
+      "setup": "Retrace into 5m supply after the NYSE crash, sweep above and reject",
+      "result": "pending",
+      "r": null,
+      "notes": "Huge crash into the NYSE open. Price retraced into a 5m supply area, went above it (liquidity taken), then rejected. A+ setup. R and chart to be added."
     }
   ]
 }

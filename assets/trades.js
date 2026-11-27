@@ -6,7 +6,7 @@ window.renderTrades = async function (type) {
   catch (e) { empty.textContent = "The trade log could not load. Refresh to try again."; empty.hidden = false; return; }
   const all = (data.trades || []).filter(t => t.type === type).sort((a, b) => (b.date + (b.time || "")).localeCompare(a.date + (a.time || "")));
   if (noteEl && data.note && type === "scalp") { noteEl.textContent = data.note; noteEl.hidden = false; }
-  const closed = all.filter(t => t.result !== "open");
+  const closed = all.filter(t => t.result !== "open" && t.result !== "pending");
   const wins = closed.filter(t => t.result === "win").length;
   const totalR = closed.reduce((s, t) => s + (Number(t.r) || 0), 0);
   const stats = [
@@ -26,8 +26,8 @@ window.renderTrades = async function (type) {
   body.replaceChildren(...all.map(t => {
     const tr = document.createElement("tr");
     const cell = (txt, cls) => { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = txt; return td; };
-    const res = t.result === "win" ? "Win" : t.result === "loss" ? "Loss" : t.result === "be" ? "Breakeven" : "Open";
-    const rTxt = t.result === "open" ? "—" : ((Number(t.r) > 0 ? "+" : "") + Number(t.r).toFixed(1) + "R");
+    const res = t.result === "win" ? "Win" : t.result === "loss" ? "Loss" : t.result === "be" ? "Breakeven" : t.result === "pending" ? "Win (R pending)" : "Open";
+    const rTxt = (t.result === "open" || t.result === "pending" || t.r == null) ? "—" : ((Number(t.r) > 0 ? "+" : "") + Number(t.r).toFixed(1) + "R");
     const setup = document.createElement("td");
     const s1 = document.createElement("div"); s1.textContent = t.setup || "";
     setup.append(s1);
@@ -35,7 +35,7 @@ window.renderTrades = async function (type) {
     if (t.entry && t.stop && t.exit) { const s3 = document.createElement("div"); s3.className = "muted"; s3.style.fontSize = "12px"; s3.textContent = "Entry " + Number(t.entry).toLocaleString("en-US") + " · Stop " + Number(t.stop).toLocaleString("en-US") + " · Exit " + Number(t.exit).toLocaleString("en-US"); setup.append(s3); }
     if (/^assets\//.test(t.chart || "")) { const a = document.createElement("a"); a.href = t.chart; a.target = "_blank"; a.rel = "noopener"; a.textContent = "View chart ↗"; a.style.fontSize = "12px"; setup.append(a); }
     tr.append(cell(t.date + (t.time ? " " + t.time : "")), cell(t.asset + " " + (t.direction || "")), setup,
-      cell(res, t.result === "win" ? "up" : t.result === "loss" ? "down" : "muted"), cell(rTxt, "num " + (Number(t.r) > 0 ? "up" : Number(t.r) < 0 ? "down" : "")));
+      cell(res, (t.result === "win" || t.result === "pending") ? "up" : t.result === "loss" ? "down" : "muted"), cell(rTxt, "num " + (Number(t.r) > 0 ? "up" : Number(t.r) < 0 ? "down" : "")));
     return tr;
   }));
 };
