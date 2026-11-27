@@ -63,33 +63,31 @@
 <script>
 window.DAILY = {
   date: "Friday, 27 November 2026",
-  updated: "09:55 Dubai time",
+  updated: "12:05 Dubai time",
   telegram: "https://t.me/beasttrader03",
   mental: "Breakeven too early is still fear. Let the stop and the target make the decision, not the feeling.",
   focus: [
-    { asset: "Bitcoin", bias: "Update coming",
-      read: "Today's read is coming shortly. Yesterday: BTC reclaimed 58K and instantly reacted back to the 60K region, roughly where we started the week. We're in the middle of the range now, which is a good place to be. Holding here makes a push towards the week's highs more likely.",
-      flip: "Price needs to hold 59,800–60,200. Losing that zone cancels the push higher.",
+    { asset: "Bitcoin", bias: "Bullish",
+      read: "BTC broke through 61,200 and is pushing towards the week's highs. The level to test now is the week high at 63,800. Claim above it and close the weekly above, and we're golden.",
+      flip: "Losing 61,200 (old resistance, now support) puts 60,300 back on the table.",
       chart: "https://www.tradingview.com/chart/?symbol=BITSTAMP:BTCUSD" },
-    { asset: "Gold", bias: "Update coming",
-      read: "Today's read is coming shortly. Yesterday: gold swept below the 3,502 November low, but the daily candle didn't close below it. That's the sweep and reclaim we were waiting for, and it's a bullish sign.",
-      flip: "On the shorter timeframes, gold needs to hold 3,426–3,435. Losing that zone cancels the bullish read.",
+    { asset: "Gold", bias: "Bullish",
+      read: "Gold held the 3,426–3,435 zone (low 3,446 on Wednesday) and bounced to around 3,650. It just needs to keep holding 3,500. There's no clear level above yet, so let it build.",
+      flip: "Losing 3,500 cancels the bounce. Macro is still a headwind: hot PCE and a Fed hike priced for December.",
       chart: "https://www.tradingview.com/chart/?symbol=OANDA:XAUUSD" }
   ],
   levels: {
     "Bitcoin": [
-      { level: "News candle high", price: 63800, role: "Resistance", note: "Top of the Jensen Huang pump. The week's high." },
-      { level: "News candle low", price: 61200, role: "Resistance", note: "First resistance on the way up." },
-      { level: "Order block + weekly open", price: 60288, role: "Support", note: "Clear order block sitting on the weekly open (60,300). Long area." },
-      { level: "Hold zone (59,800–60,200)", price: 60000, role: "Bias line", note: "Must hold for the push higher." },
-      { level: "58K reclaim", price: 58000, role: "Support", note: "Reclaimed with a huge reaction." },
-      { level: "Saturday low", price: 56000, role: "Support", note: "The low of the dip." }
+      { level: "Week high (news candle high)", price: 63800, role: "Resistance", note: "The level to test. Claim it and close the weekly above = golden." },
+      { level: "Old resistance, now support", price: 61200, role: "Bias line", note: "Must hold for the push to the week high." },
+      { level: "Weekly open", price: 60300, role: "Support", note: "Next support if 61,200 goes." },
+      { level: "58K reclaim", price: 58000, role: "Support", note: "Reclaimed with a huge reaction." }
     ],
     "Gold": [
-      { level: "Jensen news low", price: 3616, role: "Resistance", note: "Overhead resistance." },
-      { level: "Daily open (Wed)", price: 3555, role: "Resistance", note: "A reclaim would confirm the turnaround." },
-      { level: "November low (20 Nov)", price: 3502, role: "Support", note: "Swept, but no daily close below. Bullish." },
-      { level: "Hold zone (3,426–3,435)", price: 3430, role: "Bias line", note: "Must hold on the shorter timeframes." }
+      { level: "Pre-slide level (18 Nov)", price: 3742, role: "Resistance", note: "Reclaiming it would make the bounce real." },
+      { level: "Thursday's close", price: 3567, role: "Support", note: "First support under price." },
+      { level: "Hold level", price: 3500, role: "Bias line", note: "Gold just needs to keep holding this." },
+      { level: "Wednesday's low", price: 3446, role: "Support", note: "15-month low. Held the 3,426–3,435 zone." }
     ]
   },
   news: [
