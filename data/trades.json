@@ -28,6 +28,20 @@
       "result": "loss",
       "notes": "Swept the 61,720 high on the 1-minute, but the reaction was small and price came back through. Stopped out.",
       "chart": "assets/trades/2026-11-27-btc-short-scalp.png"
+    },
+    {
+      "date": "2026-11-27",
+      "type": "scalp",
+      "asset": "BTC",
+      "direction": "long",
+      "setup": "5m imbalance fill + 1-min liquidity sweep and reclaim",
+      "entry": 61647,
+      "stop": 61484,
+      "exit": 62106,
+      "r": 2.8,
+      "result": "win",
+      "notes": "A big 5m red candle stopped right at an imbalance zone. On the 1-minute, price swept the lows and reclaimed. Entered on the reclaim, target hit. Prices approximate.",
+      "chart": "assets/trades/2026-11-27-btc-long-imbalance-sweep.png"
     }
   ]
 }
